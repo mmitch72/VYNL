@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- META -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Mac Mitchell">
+        <meta name="description" content="Explore and shop vinyl collections from your favorite musical artists across all genres.">	
+        <meta name="robots" content="index, follow">
+        <title>VYNL: Online Record Store</title>
+
+        <!--LINKS-->
+        <link rel="shortcut icon" href="images/vynl_logo.png">
+        <link href="stylesheet.css" rel="stylesheet" title="Style Sheet Name">
+        <script defer src="main.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />  
+    </head>
+    <body>
+        <header id="header">
+            <a id="skip" href="#main-content">Skip to Main Content</a>
+            <label id="dark-mode">
+                <input type="checkbox" class="invisible" id="dark-mode-toggle">
+                <span class="material-symbols-outlined">light_mode</span>
+            </label>
+            <a href="index.html" id="logo"><img src="images/vynl_logo.png" alt="The VYNL logo in orange with a black vinyl record background"></a>
+            <h1 class="invisible">VYNL</h1>
+            <p></p>
+            <nav>
+                <ul class="nav-container">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#shop">Shop</a></li>                      
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main id="main-content">
+            <section id="about">
+                    <div>
+                        <h2>About <span class="vynl">VYNL</span></h2>
+                        <h3>Explore and shop vinyl collections from your favorite musical artists across all genres.</h3>
+                        <p>Search for releases by artist name, album title, genre, mood, year, decade, and more!</p>
+                    </div>
+                    <img src="images/record-store.jpg" alt="vinyl records arranged and organized in a shop">
+            </section>
+
+            <section id="shop">
+                <h2>Shop</h2>
+                <form id="searchbar">
+                    <div class="search">
+                        <span class="material-symbols-outlined">search</span>
+                        <input class="search-input" type="search" placeholder="Search" name="search" id="search">
+                        <button type="submit" title="searchSubmit" id="searchSubmit">GO</button>
+                    </div>
+                    <p>Search thousands of titles<br><span id="searchOutput"></span></p>    
+                </form>
+                <h3>Featured Albums</h3>
+                <div id="switcherButtons" class="switcherButtons">
+                    <button id="btn1" type="button">Notorious BIG<br>Ready To Die</button>
+                    <button id="btn2" type="button">Tame Impala<br>The Slow Rush</button>
+                    <button id="btn3" type="button">Thundercat<br>It Is What It Is</button>
+                </div>
+                <div id="store">
+                    <div id="productDisplay">
+                        <div id="item1" class="hiddenItem displayFlex">
+                            <dl>
+                                <dt>Artist: </dt>
+                                <dd>Biggie Smalls</dd>
+                                <dt>Year: </dt>
+                                <dd>1994</dd>
+                                <dt>Single: </dt>
+                                <dd>Juicy</dd>
+                                <dt id="item1Price">$24.99</dt>
+                                <dd>
+                                    <input type="checkbox" id="item1Check" name="item1Check" value="24.99">
+                                    <label for="item1Check">Add to Cart</label>
+                                </dd>
+                            </dl>
+                            <figure>
+                                <img src="images/Ready_To_Die.jpg" alt="Biggie Smalls Ready to Die Album Cover Art">
+                                <figcaption>Ready To Die</figcaption>
+                            </figure>
+                        </div>
+
+                        <div id="item2" class="hiddenItem displayFlex">
+                            <dl>
+                                <dt>Artist: </dt>
+                                <dd>Tame Impala</dd>
+                                <dt>Year: </dt>
+                                <dd>2020</dd>
+                                <dt>Single: </dt>
+                                <dd>Borderline</dd>
+                                <dt id ="item2Price">$32.29</dt>
+                                <dd>
+                                    <input type="checkbox" id="item2Check" name="item2Check" value="32.29">
+                                    <label for="item2Check">Add to Cart</label>
+                                </dd>
+                            </dl>
+                            <figure>
+                                <img src="images/Tame_Impala_-_The_Slow_Rush.png" alt="Tame Impala The Slow Rush Cover Art">
+                                <figcaption>The Slow Rush</figcaption>
+                            </figure>
+                        </div>
+
+                        <div id="item3" class="currentItem displayFlex">
+                            <dl>
+                                <dt>Artist: </dt>
+                                <dd>Thundercat</dd>
+                                <dt>Year: </dt>
+                                <dd>2020</dd>
+                                <dt>Single: </dt>
+                                <dd>Them Changes</dd>
+                                <dt id="item3Price">$19.89</dt>
+                                <dd>
+                                    <input type="checkbox" id="item3Check" name="item3Check" value="19.89">
+                                    <label for="item3Check">Add to Cart</label>
+                                </dd>
+                            </dl>
+                            <figure>
+                                <img src="images/Thundercat.jpg" alt="It Is What It Is Cover Art">
+                                <figcaption>It Is What It Is</figcaption>
+                            </figure>
+                        </div>
+
+                    </div>
+                    <section id="cart">
+                        <h3>Cart</h3>
+                        <ul id="itemsList">
+                            <li id="emptyCartMessage">Your Cart is Empty</li>
+                        </ul>
+                        <ul id="costList">
+                            <li id="subtotal">Subtotal: <span>$0.00</span></li>
+                            <li id="tax">Tax: <span>$0.00</span></li>
+                            <li id="shipping">Shipping: <span>$0.00</span></li>
+                            <li id="total">Total: <span>$0.00</span></li>
+                        </ul>
+                        <button id="checkout">Checkout</button>
+                    </section>
+                </div>
+            </section>
+
+            <section id="game">
+                <h2>Guessing Game</h2>
+                <p id="gameInstructions">What number are we thinking of? Pick a number 1-10 to win a <span class="vynl">VYNL</span> gift card!</p>
+                <div id="gameForm">
+                    <form>
+                        <label for="numGuess">Enter a Number Between 1 and 10:</label><br>
+                        <span id="gameErrorMessage"></span><br>
+                        <input type="number" name="numGuess" id="numGuess"><br>
+                        <input type="submit" name="guessSubmit" id="guessSubmit" value="Guess!">
+                    </form>
+                    <section id="gameDisplay">
+                        <h3 class="sr-only">Guess a Number!</h3>
+                        <ul id="gameOutput">
+                            <li id="userNum">Your Guess: <span id="userNumDisplay"></span></li>
+                            <li id="randomNum">Winning Number: <span id="randomNumDisplay"></span></li>
+                        </ul>
+                        <p id="gameMsg"></p>
+                    </section>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>Contact Us</h2>
+                <form id="contactForm">
+                    <div id="names">
+                        <label for="fName">First Name<span class="required">*</span></label>
+                        <input type="text" name="fName" id="fName" autocomplete="given-name" placeholder="First Name" required>
+                        <label for="lName">Last Name<span class="required">*</span></label>
+                        <input type="text" name="lName" id="lName" autocomplete="family-name" placeholder="Last Name" required>
+                    </div>
+                    <div id="nums">
+                        <fieldset>
+                            <legend>Contact Method<span class="required">*</span></legend>
+                            <label for="prefEmail">
+                                <span class="radio-input">
+                                    <input type="radio" name="contactPref" id="prefEmail" required checked>
+                                    <span class="radio-control"></span>
+                                </span>
+                                <span class="radio-label">Email</span>
+                            </label>
+                            <label for="prefText">
+                                <span class="radio-input">
+                                    <input type="radio" name="contactPref" id="prefText">
+                                    <span class="radio-control"></span>
+                                </span>
+                                <span class="radio-label">Text</span>
+                            </label>
+                            <label for="prefPhone">
+                                <span class="radio-input">
+                                    <input type="radio" name="contactPref" id="prefPhone">
+                                    <span class="radio-control"></span>
+                                </span>
+                                <span class="radio-label">Phone</span>
+                            </label>
+                        </fieldset>
+                        <label for="email">Email Address<span class="required">*</span></label>
+                        <input type="email" name="email" id="email" autocomplete="email" placeholder="Email Address" required>
+                        <label for="phone">Phone Number<span class="required">*</span></label>
+                        <input type="tel" name="phone" id="phone" autocomplete="tel" placeholder="Phone Number" required>
+                    </div>
+                    <input type="submit" name="mySubmit" id="mySubmit" value="Submit">
+                </form>
+            </section>
+        </main>
+        <footer>
+            <p>Copyright &copy; 2024 <span class="vynl">VYNL</span></p>
+        </footer>
+    </body>
+</html>

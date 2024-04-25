@@ -1,0 +1,419 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/* CSS RESET */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+/* STYLES */
+
+:root{
+    --primary: white;    
+    --secondary: #ececec;
+    --vynl-orange: #FE9515;
+    --black: black;
+}
+
+html {
+    font-family: "Ubuntu", sans-serif;
+}
+
+body {
+    background-color: var(--primary);
+    color: black;
+    width: 1280px;
+    margin: 0 auto;
+}
+.vynl{
+    font-family: "Montserrat Alternates", sans-serif;
+    color: var(--vynl-orange);
+    font-weight: bold;
+}
+#dark-mode {
+    width: 100px;
+}
+.sr-only{
+    display:none;
+}
+#skip
+{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+#skip:focus
+{
+    position:static;
+    width:auto;
+    height:auto;
+}
+#logo img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+nav li{
+    font-family: "Montserrat Alternates", sans-serif;
+    font-weight: 600;
+    font-size: 3.5em;
+
+}
+nav a{
+    text-decoration: none;
+    color: var(--vynl-orange);
+    background-color: var(--secondary);
+    border-radius: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+nav a:visited{
+    color: var(--black);
+}
+nav a:hover{
+    background-color: black;
+}
+nav a:visited:hover{
+    color: var(--primary);
+}
+.nav-container{
+    display: flex;
+    width: 700px;
+    justify-content: space-between;
+}
+header{
+    padding-bottom: 5px;
+    background-color: var(--secondary);
+}
+header img{
+    padding-top: 80px;
+}
+header label{
+    position: relative;
+    align-items: end;
+}
+#about div{
+    margin-top: 85px;
+}
+.search{
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    border-radius: 36px;
+    background-color: rgb(254, 149, 21, 0.75);
+}
+.search-input{
+    font-family: "Montserrat Alternates", sans-serif;
+    font-size: 36px;
+    margin-left: 14px;
+    background-color: rgb(254, 149, 21, 0.75);
+    border: none;
+    outline: none;
+    background: transparent;
+
+}
+#searchbar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--black);
+}
+#searchbar p{
+    width:100%;
+    text-align: center;
+    padding-top: 25px;
+    font-size: 25px;
+}
+.search button{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: transparent;
+}
+
+.invisible{
+    display: none;
+}
+h2{
+    font-size: 3em;
+    text-align: center;
+}
+#about h2{
+    margin-bottom: 30px;
+}
+#about h3{
+    margin-left: 30px;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+#about p{
+    margin-left: 30px;
+    font-size: 1em;
+}
+#about img{
+    width: 100%;
+    height: 100%;
+}
+#about{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+#store{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding-top:35px;
+    padding-bottom: 50px;
+}
+#shop{
+    background-color: var(--secondary);
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+#shop h3{
+    padding-top: 50px;
+}
+.displayFlex{
+    display: flex;
+    align-items: center;
+}
+#productDisplay dl{
+    line-height: 4rem;
+    text-align: center;
+    flex-basis: 385px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 100px;
+}
+dt{
+    font-weight: bold;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 20px;
+    width: 33%;
+}
+dd{
+    text-align: left;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 20px;
+    width: 66%;
+}
+figcaption{
+    margin-top: 25px;
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+}
+.hiddenItem{
+    display: none;
+}
+#shop h3{
+    font-size: 2em;
+    text-align: center;
+}
+#switcherButtons{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding-top: 30px;
+}
+#switcherButtons button{
+    color: black;
+    font-size: 1rem;
+    background-color: transparent;
+    border: 15px solid transparent;
+    cursor: pointer;
+    line-height: 2;
+}
+#switcherButtons button:hover{
+    border-top: 15px solid var(--vynl-orange);
+}
+#cart{
+	text-align: center;
+    border: 3px solid black;
+}
+#itemsList li{
+	padding-bottom: 0.25rem;
+	border-bottom: 1px solid #555;
+}
+#costList li{
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+.form-required
+{
+    font-family: "Montserrat Alternates", sans-serif;
+	font-style: italic;
+	font-size: 24px;
+}
+#contact{
+    background-color: var(--secondary);
+    padding-top: 40px;
+}
+#contactForm{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+#contact #names, #nums{
+    flex-basis: 50%;
+}
+#contact #mySubmit{
+    width: 50%;
+    margin-left: 26px;
+}
+#contact #names, #nums, #selects
+{
+	display: grid;
+	width: 320px;
+	margin-left: 26px;
+}
+fieldset
+{
+	display: flex;
+    justify-content: center;
+}
+fieldset .radio-label
+{
+	position: relative;
+	bottom: 25px;
+}
+#contact input:not(#prefEmail, #prefText, #prefPhone), .custom-select
+{
+	margin-bottom: 20px;
+	border: 4px solid var(--vynl-orange);
+	height: 4em;
+}
+#contact label, legend
+{
+	font-size: 20px;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+.radio-label
+{
+	display: inline-block;
+	text-transform: none;
+	font-weight: normal;
+}
+input[type="radio"] {
+  	width: 5em;
+  	height: 5em;
+  	border: 4px solid var(--vynl-orange);
+  	border-radius: 50%;
+}
+.required{
+	display: inline-block;
+	color: var(--vynl-orange);
+	font-size: 1.1em;
+	font-weight: bold;
+}
+::placeholder {
+	font-size: 20px;
+	padding-left: 10px;
+}
+input[type="submit"] {
+	background-color: var(--vynl-orange);
+	height: 60px;
+	color: var(--primary);
+	text-transform: uppercase;
+	font-size: 20px;
+}
+#game{
+    padding-top: 40px;
+}
+#game #gameInstructions{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+#game #numGuess{
+    width: 50px;
+    margin-bottom: 15px;
+}
+#gameForm{
+    line-height: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#gameForm form, #gameDisplay{
+    text-align: center;
+}
+input#guessSubmit{
+    background-color:var(--vynl-orange);
+    height: 40px;
+    color: var(--primary);
+    text-transform: uppercase;
+    font-size: 18px;
+    border: transparent;
+    box-shadow: 2px 2px 4px 5px var(--secondary);
+    border-radius: 10px;
+}
+footer p{
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-style: italic;
+}
