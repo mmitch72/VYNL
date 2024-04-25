@@ -1,2 +1,2 @@
-# VINYL
+# VYNL
 online vinyl record store
