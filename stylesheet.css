@@ -50,6 +50,7 @@ table {
 
 /* STYLES */
 
+
 :root{
     --primary: white;    
     --secondary: #ececec;
@@ -146,8 +147,16 @@ header label{
     position: relative;
     align-items: end;
 }
-#about div{
+#aboutText{
     margin-top: 85px;
+}
+.slideshow {
+    overflow: hidden;
+    margin: auto;
+}
+.ui-tooltip {
+    width: 200px;
+    padding: 5px;
 }
 .search{
     width: max-content;
@@ -187,6 +196,21 @@ header label{
     border-radius: 100%;
     background-color: transparent;
 }
+
+#searchOutput {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 51%;
+}
+.albumCover {
+    padding: 5px;
+    border-radius: 10px;
+}
+#outputMessage {
+    padding-bottom: 25px;
+}
+
 
 .invisible{
     display: none;
@@ -242,6 +266,12 @@ h2{
     flex-wrap: wrap;
     padding-left: 100px;
 }
+#productDisplay figure{
+    display: flex;
+}
+#tabs .ui-tabs-panel.ui-tabs-active {
+    display: flex !important;
+}
 dt{
     font-weight: bold;
     font-family: "Ubuntu", sans-serif;
@@ -268,7 +298,7 @@ figcaption{
     text-align: center;
 }
 #switcherButtons{
-    display: flex;
+    display: none;
     justify-content: center;
     gap: 40px;
     padding-top: 30px;
@@ -284,6 +314,19 @@ figcaption{
 #switcherButtons button:hover{
     border-top: 15px solid var(--vynl-orange);
 }
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#productDisplay figure img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
 #cart{
 	text-align: center;
     border: 3px solid black;

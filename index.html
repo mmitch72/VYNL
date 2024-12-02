@@ -12,13 +12,16 @@
         <!--LINKS-->
         <link rel="shortcut icon" href="images/vynl_logo.png">
         <link href="stylesheet.css" rel="stylesheet" title="Style Sheet Name">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--JQUERY-->
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script><!--JQUERY UI-->
+        <link rel="stylesheet" href="jquery-ui-1.14.1.custom/jquery-ui.theme.min.css"><!--CUSTOM JQUERY THEME-->
+        <script src="https://malsup.github.io/jquery.cycle2.js"></script><!--JQUERY SLIDESHOW PLUGIN-->
         <script defer src="main.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />  
+        
     </head>
     <body>
         <header id="header">
@@ -40,12 +43,19 @@
         </header>
         <main id="main-content">
             <section id="about">
-                    <div>
+                    <div id="aboutText">
                         <h2>About <span class="vynl">VYNL</span></h2>
                         <h3>Explore and shop vinyl collections from your favorite musical artists across all genres.</h3>
                         <p>Search for releases by artist name, album title, genre, mood, year, decade, and more!</p>
                     </div>
-                    <img src="images/record-store.jpg" alt="vinyl records arranged and organized in a shop">
+                    <div class ="cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="3000">
+                        <img src="images/record-store.jpg" alt="vinyl records arranged and organized in a shop">
+                        <!--Image source: https://secretseattle.co/seattle-record-stores/-->
+                        <img src="images/record-store-2.jpg" alt="close up of vinyl records arranged and organized in a shop">
+                        <!--Image source: https://sleevecityusa.com/cdn/shop/files/records-for-sale_1024x.jpg?v=1613710322/-->
+                        <img src="images/record-store-3.jpg" alt="person shopping for vinyl records">
+                        <!--Image source: https://www.irishtimes.com/culture/music/2024/04/19/this-is-like-our-christmas-music-outlets-preparing-for-queues-on-world-record-store-day/-->
+                    </div>
             </section>
 
             <section id="shop">
@@ -53,10 +63,10 @@
                 <form id="searchbar">
                     <div class="search">
                         <span class="material-symbols-outlined">search</span>
-                        <input class="search-input" type="search" placeholder="Search" name="search" id="search">
+                        <input class="search-input" type="search" placeholder="Search" name="searchInput" id="searchInput" title="You can search for artists, song titles, years, or genres but search album titles for best results!">
                         <button type="submit" title="searchSubmit" id="searchSubmit">GO</button>
                     </div>
-                    <p>Search thousands of titles<br><span id="searchOutput"></span></p>    
+                    <p id="outputMessage">Search millions of titles!<br><div id="searchOutput"></div>
                 </form>
                 <h3>Featured Albums</h3>
                 <div id="switcherButtons" class="switcherButtons">
@@ -65,8 +75,13 @@
                     <button id="btn3" type="button">Thundercat<br>It Is What It Is</button>
                 </div>
                 <div id="store">
-                    <div id="productDisplay">
-                        <div id="item1" class="hiddenItem displayFlex">
+                    <div id="productDisplay" class="tabs">
+                        <ul>
+                            <li><a href="#item1">Ready to Die</a></li>
+                            <li><a href="#item2">The Slow Rush</a></li>
+                            <li><a href="#item3">It Is What It Is</a></li>
+                        </ul>
+                        <div id="item1" class="hiddenItem displayFlex subsec">
                             <dl>
                                 <dt>Artist: </dt>
                                 <dd>Biggie Smalls</dd>
@@ -80,13 +95,13 @@
                                     <label for="item1Check">Add to Cart</label>
                                 </dd>
                             </dl>
-                            <figure>
+                            <figure class="center">
                                 <img src="images/Ready_To_Die.jpg" alt="Biggie Smalls Ready to Die Album Cover Art">
                                 <figcaption>Ready To Die</figcaption>
                             </figure>
                         </div>
 
-                        <div id="item2" class="hiddenItem displayFlex">
+                        <div id="item2" class="hiddenItem displayFlex subsec">
                             <dl>
                                 <dt>Artist: </dt>
                                 <dd>Tame Impala</dd>
@@ -100,13 +115,13 @@
                                     <label for="item2Check">Add to Cart</label>
                                 </dd>
                             </dl>
-                            <figure>
+                            <figure class="center">
                                 <img src="images/Tame_Impala_-_The_Slow_Rush.png" alt="Tame Impala The Slow Rush Cover Art">
                                 <figcaption>The Slow Rush</figcaption>
                             </figure>
                         </div>
 
-                        <div id="item3" class="currentItem displayFlex">
+                        <div id="item3" class="currentItem displayFlex subsec">
                             <dl>
                                 <dt>Artist: </dt>
                                 <dd>Thundercat</dd>
@@ -120,7 +135,7 @@
                                     <label for="item3Check">Add to Cart</label>
                                 </dd>
                             </dl>
-                            <figure>
+                            <figure class="center">
                                 <img src="images/Thundercat.jpg" alt="It Is What It Is Cover Art">
                                 <figcaption>It Is What It Is</figcaption>
                             </figure>

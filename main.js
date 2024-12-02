@@ -1,5 +1,8 @@
 "use strict"
 
+
+//---------------------------global variables----------------------------------//
+
 const body = document.getElementsByTagName("body")[0];
 const stylesheet = document.styleSheets[0];
 const darkMode = document.getElementById("dark-mode-toggle");
@@ -13,10 +16,39 @@ const darkModeIcon = document.getElementsByClassName('material-symbols-outlined'
 const item1 = document.getElementById('item1');
 const item2 = document.getElementById('item2');
 const item3 = document.getElementById('item3');
+const searchElem = document.getElementById('searchInput');
+const searchSubmit = document.getElementById('searchSubmit');
+const searchResultMessage = document.getElementById("searchOutput");
+const outputMessage = document.getElementById("outputMessage");
 
 
 //-------------------------------------dark mode-------------------------------//
+//checked for stored theme in local storage and apply
 
+const storedTheme = localStorage.getItem('theme');
+if (storedTheme === 'dark') {
+    body.style.backgroundColor = "black";
+    body.style.color = "white";
+    header.style.backgroundColor = "black";
+    shop.style.backgroundColor = "black";
+    contact.style.backgroundColor = "black";
+    bt1.style.color = "white";
+    bt2.style.color = "white";
+    bt3.style.color = "white";
+    darkModeIcon.innerHTML = "dark_mode";
+    darkMode.checked = true; // Set the checkbox to checked for dark mode
+} else {
+    body.style.backgroundColor = "white";
+    body.style.color = "black";
+    header.style.backgroundColor = "#ececec";
+    shop.style.backgroundColor = "#ececec";
+    contact.style.backgroundColor = "#ececec";
+    bt1.style.color = "black";
+    bt2.style.color = "black";
+    bt3.style.color = "black";
+    darkModeIcon.innerHTML = "light_mode";
+    darkMode.checked = false; // Set the checkbox to unchecked for light mode
+}
 
 darkMode.addEventListener('change', function(){
     if(this.checked){
@@ -29,6 +61,8 @@ darkMode.addEventListener('change', function(){
         bt2.style.color = "white";
         bt3.style.color = "white";
         darkModeIcon.innerHTML = "dark_mode";
+
+        localStorage.setItem('theme', 'dark');
     }
     else{
         body.style.backgroundColor = "white";
@@ -40,8 +74,16 @@ darkMode.addEventListener('change', function(){
         bt2.style.color = "black";
         bt3.style.color = "black";
         darkModeIcon.innerHTML = "light_mode";
+
+        localStorage.setItem('theme', 'light');
     }
 });
+
+
+// jQuery ui tooltip widget
+$( function() {
+    $( document ).tooltip();
+  } );
 
 //product display switcher functions
 function displayProduct1(){
@@ -62,25 +104,80 @@ function displayProduct3(){
 
 
 
-//--------------------------display search results-----------------------//
+//--------------------------get album content from iTunes---------------------------//
 
-function displaySearchResult(e){
-    e.preventDefault();
+// API Documentation @ https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/Searching.html#//apple_ref/doc/uid/TP40017632-CH5-SW1
 
-    let searchResultMessage = document.getElementById("searchOutput");
+searchElem.addEventListener('keydown', (event) => {
+    console.log(`Key pressed: ${event.key}`);
+    if (event.key === 'Enter') {
+        event.preventDefault()
+        console.log('Enter pressed!');
+        const term = encodeURIComponent(searchElem.value.trim());
+        searchItunes(term);
+    }
+});
 
-    searchResultMessage.innerHTML = "No result yet! We are adding inventory daily, try again later!";
+searchSubmit.addEventListener('click', (event) => {
+    event.preventDefault();
+    console.log('Search button clicked!');
+    const term = encodeURIComponent(searchElem.value.trim());
+    searchItunes(term);
+});
+
+function searchItunes(term) {
+    console.log('Search term:', term);
+    const corsProxy = 'https://api.allorigins.win/get?url=';
+    const url = `${corsProxy}${encodeURIComponent(`https://itunes.apple.com/search?term=${term}&media=music&entity=song&limit=50`)}`;
+    console.log('Fetching URL:', url);
+    let output = "";
+
+
+    // fetch and display albums
+    fetch(url)
+        .then(response => response.json()) // Extract the proxy's JSON response
+        .then(proxyData => {
+            const data = JSON.parse(proxyData.contents); // Parse the actual API response
+            console.log('API Response:', data);
+
+            if (data.results.length === 0) {
+                console.log('No results found.');
+                outputMessage.innerHTML = `No results found for '${term}'`;
+            } else {
+                const uniqueAlbums = {}; // An object to track unique albums
+                for (const item of data.results) {
+                    console.log('Result:', item);
+                    if (!uniqueAlbums[item.collectionName]) {
+                        uniqueAlbums[item.collectionName] = true;
+
+                        output += `<section>
+                                        <a href="${item.collectionViewUrl}" target="_blank">
+                                            <img src="${item.artworkUrl100}" alt="${item.artistName} ${item.collectionName}" class="albumCover">
+                                        </a>
+                                    </section>`;
+                    }
+                }
+                searchResultMessage.innerHTML = output;
+                outputMessage.innerHTML = `Showing results for '${searchElem.value}'`;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            outputMessage.innerHTML = `Failed to fetch results. Please try again later.`;
+        });
 }
 
 
-
-
 //--------------------------cost calculator------------------------------//
+//****WIP - Use checkbox data values to create objects****//
+
+
 
 //create an empty cart array
 let cart = [];
 
 //represent each product as object
+
 let item1Object = {
     name: "Ready to Die",
     artist: "Biggie Smalls",
@@ -97,6 +194,7 @@ let item3Object = {
     price: 19.89
 };
 
+//define page display variables//
 let emptyCartMessage = document.getElementById('emptyCartMessage');
 let runningSubtotal = 0.00;
 let runningTax = 0.00;
@@ -104,18 +202,16 @@ let runningShipping = 0.00;
 let runningTotal = 0.00;
 const taxRate = 0.09;
 const shippingRate = 0.08;
-
-//get checkbox inputs
-let itemCheckboxes = document.querySelectorAll("#productDisplay input[type='checkbox']");
-
-//get costListSpans
 let subtotalSpan = document.getElementById('subtotal').children[0];
 let taxSpan = document.getElementById('tax').children[0];
 let shippingSpan = document.getElementById('shipping').children[0];
 let totalSpan = document.getElementById('total').children[0];
 
+//get checkbox inputs
+let itemCheckboxes = document.querySelectorAll("#productDisplay input[type='checkbox']");
 
-//take whatever is in cart and calculate totals and displays on page
+
+//take whatever is in cart and calculate totals and display on page
 function addToCart(){
     runningSubtotal = 0.00;
     cart.forEach((cartItemToAdd) => {
@@ -136,7 +232,7 @@ function cartList(e){
     //which check box was clicked
     let currentItem = e.target;
 
-    //if checkbox was checkd, add to array and output, or if uncheck remove
+    //if checkbox was checked, add to array and output, or if uncheck remove
     if(currentItem.checked && currentItem.name === "item1Check"){
         if(cart.indexOf(item1Object) === -1){//if item is not already in cart
             cart.push(item1Object);
@@ -173,7 +269,13 @@ function cartList(e){
     }
 }
 
-
+$(function(){
+	$(".tabs").tabs({
+        activate: function(event, ui) {
+            ui.newPanel.css("display","flex");
+        }
+    });
+});
 
 //-----------------------------------guessing game--------------------------------//
 
@@ -216,6 +318,8 @@ function guessGame(e){
 		gameErrorMessage.innerHTML = error;
 	}
 }
+
+// generate random number//
 function getRandomNumber(min, max) {
    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -223,9 +327,10 @@ function getRandomNumber(min, max) {
 
 
 
-//-----------------------------------Event Handlers------------------------//
+//-----------------------------------Event Handlers--------------------------//
 
-document.getElementById('searchSubmit').addEventListener("click", displaySearchResult);
+
+
 document.getElementById("btn1").addEventListener("click", displayProduct1);
 document.getElementById("btn2").addEventListener("click", displayProduct2);
 document.getElementById("btn3").addEventListener("click", displayProduct3);
