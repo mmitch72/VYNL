@@ -23,7 +23,7 @@ const outputMessage = document.getElementById("outputMessage");
 
 
 //-------------------------------------dark mode-------------------------------//
-//checked for stored theme in local storage and apply
+//check for stored theme in local storage and apply
 
 const storedTheme = localStorage.getItem('theme');
 if (storedTheme === 'dark') {
@@ -80,33 +80,22 @@ darkMode.addEventListener('change', function(){
 });
 
 
-// jQuery ui tooltip widget
+// jQuery ui tooltip widget displays a tip for users when the mouse hovers over the search bar
 $( function() {
     $( document ).tooltip();
   } );
-
-//product display switcher functions
-function displayProduct1(){
-    item1.classList.remove('hiddenItem');
-    item2.classList.add('hiddenItem');
-    item3.classList.add('hiddenItem');
-}
-function displayProduct2(){
-    item1.classList.add('hiddenItem');
-    item2.classList.remove('hiddenItem');
-    item3.classList.add('hiddenItem');
-}
-function displayProduct3(){
-    item1.classList.add('hiddenItem');
-    item2.classList.add('hiddenItem');
-    item3.classList.remove('hiddenItem');
-}
 
 
 
 //--------------------------get album content from iTunes---------------------------//
 
+// This feature listens for events on the search bar, calls the 'searchItunes' function which builds a url based on the user input.
+// The function uses a fetch API to request data and a CORS proxy to access Itunes Web API data.
+// The JSON data is then extracted from the wrapped response, parsed, filtered for uniqueness and displayed to the page.
+
 // API Documentation @ https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/Searching.html#//apple_ref/doc/uid/TP40017632-CH5-SW1
+
+// CORS proxy: https://allorigins.win/
 
 searchElem.addEventListener('keydown', (event) => {
     console.log(`Key pressed: ${event.key}`);
@@ -167,11 +156,23 @@ function searchItunes(term) {
         });
 }
 
+//-----------------------------jQuery Tab Plugin function-------------------------//
 
-//--------------------------cost calculator------------------------------//
-//****WIP - Use checkbox data values to create objects****//
+// Displays products in the productDisplay div as tabs
+
+$(function(){
+	$(".tabs").tabs({
+        activate: function(event, ui) {
+            ui.newPanel.css("display","flex");
+        }
+    });
+});
 
 
+
+//--------------------------cost calculator (bonus feature)------------------------------//
+
+//****This feature has bugs to work on. I should have used checkbox data values to create objects instead of manually creating them//
 
 //create an empty cart array
 let cart = [];
@@ -269,15 +270,10 @@ function cartList(e){
     }
 }
 
-$(function(){
-	$(".tabs").tabs({
-        activate: function(event, ui) {
-            ui.newPanel.css("display","flex");
-        }
-    });
-});
 
-//-----------------------------------guessing game--------------------------------//
+
+
+//-----------------------------------guessing game (bonus feature)--------------------------------//
 
 function guessGame(e){  
     e.preventDefault();
@@ -327,13 +323,8 @@ function getRandomNumber(min, max) {
 
 
 
-//-----------------------------------Event Handlers--------------------------//
+//-------------------------------Event Handlers---------------------------//
 
-
-
-document.getElementById("btn1").addEventListener("click", displayProduct1);
-document.getElementById("btn2").addEventListener("click", displayProduct2);
-document.getElementById("btn3").addEventListener("click", displayProduct3);
 for(let itemCheckbox of itemCheckboxes){
     itemCheckbox.addEventListener("change", cartList);
 }
