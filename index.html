@@ -7,6 +7,7 @@
         <meta name="author" content="Mac Mitchell">
         <meta name="description" content="Explore and shop vinyl collections from your favorite musical artists across all genres.">	
         <meta name="robots" content="index, follow">
+        <meta name="keywords" content="vinyl records, music, albums, record store, VYNL">
         <title>VYNL: Online Record Store</title>
 
         <!--LINKS & SCRIPTS-->
@@ -24,64 +25,65 @@
 
     </head>
     <body>
-        <header id="header">
+        <header id="header" role="banner">
             <a id="skip" href="#main-content">Skip to Main Content</a>
-            <label id="dark-mode">
-                <input type="checkbox" class="invisible" id="dark-mode-toggle">
-                <span class="material-symbols-outlined">light_mode</span>
+            <label id="dark-mode" aria-label="Toggle dark mode">
+                <input type="checkbox" class="invisible" id="dark-mode-toggle" aria-label="Dark mode toggle">
+                <span class="material-symbols-outlined" aria-hidden="true">light_mode</span>
             </label>
-            <a href="index.html" id="logo"><img src="images_compressed/vynl_logo.png" alt="The VYNL logo in orange with a black vinyl record background"></a>
+            <a href="index.html" id="logo" aria-label="VYNL Homepage">
+                <img src="images_compressed/vynl_logo.png" alt="The VYNL logo in orange with a black vinyl record background">
+            </a>
             <h1 class="invisible">VYNL</h1>
-            <p></p>
-            <nav>
+            <nav role="navigation" aria-label="Main navigation">
                 <ul class="nav-container">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#shop">Shop</a></li>                      
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about" aria-label="Go to About section">About</a></li>
+                    <li><a href="#shop" aria-label="Go to Shop section">Shop</a></li>                      
+                    <li><a href="#contact" aria-label="Go to Contact section">Contact</a></li>
                 </ul>
             </nav>
         </header>
-        <main id="main-content">
-            <section id="about">
+        <main id="main-content" role="main">
+            <section id="about" aria-labelledby="about-heading">
                     <div id="aboutText">
-                        <h2>About <span class="vynl">VYNL</span></h2>
+                        <h2 id="about-heading">About <span class="vynl">VYNL</span></h2>
                         <h3>Explore and shop vinyl collections from your favorite musical artists across all genres.</h3>
                         <p>Search for releases by artist name, album title, genre, mood, year, decade, and more!</p>
                     </div>
-                    <div class ="cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="3000">
-                        <img src="images_compressed/record-store.jpg" alt="vinyl records arranged and organized in a shop">
+                    <div class="cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="3000" role="region" aria-label="Record store slideshow">
+                        <img src="images_compressed/record-store.jpg" alt="Vinyl records arranged and organized in a shop">
                         <!--Image source: https://secretseattle.co/seattle-record-stores/-->
-                        <img src="images_compressed/record-store-2.jpg" alt="close up of vinyl records separated in crates">
+                        <img src="images_compressed/record-store-2.jpg" alt="Close up of vinyl records separated in crates">
                         <!--Image source: https://sleevecityusa.com/cdn/shop/files/records-for-sale_1024x.jpg?v=1613710322/-->
-                        <img src="images_compressed/record-store-3.jpg" alt="lighted wall of vinyl records in a storefront">
+                        <img src="images_compressed/record-store-3.jpg" alt="Lighted wall of vinyl records in a storefront">
                         <!--Image source: https://images.the500hiddensecrets.com/2020-02/182-toronto-tiny_record_store.jpg?auto=format&fit=max&h=1080&ixlib=php-1.1.0&q=65&w=1920&s=455c9506df5397f87b101f0c386fedc6-->
                     </div>
             </section>
 
-            <section id="shop">
-                <h2>Shop</h2>
-                <form id="searchbar">
+            <section id="shop" aria-labelledby="shop-heading">
+                <h2 id="shop-heading">Shop</h2>
+                <form id="searchbar" role="search" aria-label="Search albums">
                     <div class="search">
-                        <span class="material-symbols-outlined">search</span>
-                        <input class="search-input" type="search" placeholder="Search" name="searchInput" id="searchInput" title="You can search for artists, song titles, years, or genres but search album titles for best results!">
-                        <button type="submit" title="searchSubmit" id="searchSubmit">GO</button>
+                        <span class="material-symbols-outlined" aria-hidden="true">search</span>
+                        <input class="search-input" type="search" placeholder="Search albums, artists, or genres..." name="searchInput" id="searchInput" title="You can search for artists, song titles, years, or genres but search album titles for best results!" aria-label="Search for albums">
+                        <button type="submit" title="searchSubmit" id="searchSubmit" aria-label="Submit search">GO</button>
                     </div>
-                    <p id="outputMessage">Search millions of titles!<br><div id="searchOutput"></div>
+                    <p id="outputMessage">Search millions of titles!<br><div id="searchOutput" role="region" aria-label="Search results"></div>
                 </form>
                 <h3>Featured Albums</h3>
-                <div id="switcherButtons" class="switcherButtons">
-                    <button id="btn1" type="button">Notorious BIG<br>Ready To Die</button>
-                    <button id="btn2" type="button">Tame Impala<br>The Slow Rush</button>
-                    <button id="btn3" type="button">Thundercat<br>It Is What It Is</button>
+                <div id="switcherButtons" class="switcherButtons" role="tablist" aria-label="Album selection">
+                    <button id="btn1" type="button" role="tab" aria-selected="false" aria-controls="item1">Notorious BIG<br>Ready To Die</button>
+                    <button id="btn2" type="button" role="tab" aria-selected="false" aria-controls="item2">Tame Impala<br>The Slow Rush</button>
+                    <button id="btn3" type="button" role="tab" aria-selected="true" aria-controls="item3">Thundercat<br>It Is What It Is</button>
                 </div>
                 <div id="store">
-                    <div id="productDisplay" class="tabs">
-                        <ul>
-                            <li><a href="#item1">Ready to Die</a></li>
-                            <li><a href="#item2">The Slow Rush</a></li>
-                            <li><a href="#item3">It Is What It Is</a></li>
+                    <div id="productDisplay" class="tabs" role="tabpanel">
+                        <ul role="tablist">
+                            <li><a href="#item1" role="tab" aria-selected="false" aria-controls="item1">Ready to Die</a></li>
+                            <li><a href="#item2" role="tab" aria-selected="false" aria-controls="item2">The Slow Rush</a></li>
+                            <li><a href="#item3" role="tab" aria-selected="true" aria-controls="item3">It Is What It Is</a></li>
                         </ul>
-                        <div id="item1" class="hiddenItem displayFlex subsec">
+                        <div id="item1" class="hiddenItem displayFlex subsec" role="tabpanel" aria-labelledby="btn1">
                             <dl>
                                 <dt>Artist: </dt>
                                 <dd>Biggie Smalls</dd>
@@ -91,7 +93,7 @@
                                 <dd>Juicy</dd>
                                 <dt id="item1Price">$24.99</dt>
                                 <dd>
-                                    <input type="checkbox" id="item1Check" name="item1Check" value="24.99">
+                                    <input type="checkbox" id="item1Check" name="item1Check" value="24.99" aria-label="Add Ready to Die to cart">
                                     <label for="item1Check">Add to Cart</label>
                                 </dd>
                             </dl>
@@ -101,7 +103,7 @@
                             </figure>
                         </div>
 
-                        <div id="item2" class="hiddenItem displayFlex subsec">
+                        <div id="item2" class="hiddenItem displayFlex subsec" role="tabpanel" aria-labelledby="btn2">
                             <dl>
                                 <dt>Artist: </dt>
                                 <dd>Tame Impala</dd>
@@ -109,9 +111,9 @@
                                 <dd>2020</dd>
                                 <dt>Single: </dt>
                                 <dd>Borderline</dd>
-                                <dt id ="item2Price">$32.29</dt>
+                                <dt id="item2Price">$32.29</dt>
                                 <dd>
-                                    <input type="checkbox" id="item2Check" name="item2Check" value="32.29">
+                                    <input type="checkbox" id="item2Check" name="item2Check" value="32.29" aria-label="Add The Slow Rush to cart">
                                     <label for="item2Check">Add to Cart</label>
                                 </dd>
                             </dl>
@@ -121,7 +123,7 @@
                             </figure>
                         </div>
 
-                        <div id="item3" class="currentItem displayFlex subsec">
+                        <div id="item3" class="currentItem displayFlex subsec" role="tabpanel" aria-labelledby="btn3">
                             <dl>
                                 <dt>Artist: </dt>
                                 <dd>Thundercat</dd>
@@ -131,7 +133,7 @@
                                 <dd>Them Changes</dd>
                                 <dt id="item3Price">$19.89</dt>
                                 <dd>
-                                    <input type="checkbox" id="item3Check" name="item3Check" value="19.89">
+                                    <input type="checkbox" id="item3Check" name="item3Check" value="19.89" aria-label="Add It Is What It Is to cart">
                                     <label for="item3Check">Add to Cart</label>
                                 </dd>
                             </dl>
@@ -142,87 +144,87 @@
                         </div>
 
                     </div>
-                    <section id="cart">
+                    <aside id="cart" role="complementary" aria-label="Shopping cart">
                         <h3>Cart</h3>
-                        <ul id="itemsList">
+                        <ul id="itemsList" aria-label="Cart items">
                             <li id="emptyCartMessage">Your Cart is Empty</li>
                         </ul>
-                        <ul id="costList">
+                        <ul id="costList" aria-label="Cart totals">
                             <li id="subtotal">Subtotal: <span>$0.00</span></li>
                             <li id="tax">Tax: <span>$0.00</span></li>
                             <li id="shipping">Shipping: <span>$0.00</span></li>
                             <li id="total">Total: <span>$0.00</span></li>
                         </ul>
-                        <button id="checkout">Checkout</button>
-                    </section>
+                        <button id="checkout" aria-label="Proceed to checkout">Checkout</button>
+                    </aside>
                 </div>
             </section>
 
-            <section id="game">
-                <h2>Guessing Game</h2>
+            <section id="game" aria-labelledby="game-heading">
+                <h2 id="game-heading">Guessing Game</h2>
                 <p id="gameInstructions">What number are we thinking of? Pick a number 1-10 to win a <span class="vynl">VYNL</span> gift card!</p>
                 <div id="gameForm">
-                    <form>
+                    <form aria-label="Number guessing game">
                         <label for="numGuess">Enter a Number Between 1 and 10:</label><br>
-                        <span id="gameErrorMessage"></span><br>
-                        <input type="number" name="numGuess" id="numGuess"><br>
-                        <input type="submit" name="guessSubmit" id="guessSubmit" value="Guess!">
+                        <span id="gameErrorMessage" role="alert" aria-live="polite"></span><br>
+                        <input type="number" name="numGuess" id="numGuess" min="1" max="10" aria-describedby="gameErrorMessage"><br>
+                        <input type="submit" name="guessSubmit" id="guessSubmit" value="Guess!" aria-label="Submit your guess">
                     </form>
-                    <section id="gameDisplay">
+                    <section id="gameDisplay" aria-label="Game results">
                         <h3 class="sr-only">Guess a Number!</h3>
                         <ul id="gameOutput">
                             <li id="userNum">Your Guess: <span id="userNumDisplay"></span></li>
                             <li id="randomNum">Winning Number: <span id="randomNumDisplay"></span></li>
                         </ul>
-                        <p id="gameMsg"></p>
+                        <p id="gameMsg" role="status" aria-live="polite"></p>
                     </section>
                 </div>
             </section>
 
-            <section id="contact">
-                <h2>Contact Us</h2>
-                <form id="contactForm">
+            <section id="contact" aria-labelledby="contact-heading">
+                <h2 id="contact-heading">Contact Us</h2>
+                <form id="contactForm" aria-label="Contact form">
                     <div id="names">
-                        <label for="fName">First Name<span class="required">*</span></label>
-                        <input type="text" name="fName" id="fName" autocomplete="given-name" placeholder="First Name" required>
-                        <label for="lName">Last Name<span class="required">*</span></label>
-                        <input type="text" name="lName" id="lName" autocomplete="family-name" placeholder="Last Name" required>
+                        <label for="fName">First Name<span class="required" aria-label="required">*</span></label>
+                        <input type="text" name="fName" id="fName" autocomplete="given-name" placeholder="First Name" required aria-required="true">
+                        <label for="lName">Last Name<span class="required" aria-label="required">*</span></label>
+                        <input type="text" name="lName" id="lName" autocomplete="family-name" placeholder="Last Name" required aria-required="true">
                     </div>
                     <div id="nums">
                         <fieldset>
-                            <legend>Contact Method<span class="required">*</span></legend>
+                            <legend>Contact Method<span class="required" aria-label="required">*</span></legend>
                             <label for="prefEmail">
                                 <span class="radio-input">
-                                    <input type="radio" name="contactPref" id="prefEmail" required checked>
+                                    <input type="radio" name="contactPref" id="prefEmail" required checked aria-required="true">
                                     <span class="radio-control"></span>
                                 </span>
                                 <span class="radio-label">Email</span>
                             </label>
                             <label for="prefText">
                                 <span class="radio-input">
-                                    <input type="radio" name="contactPref" id="prefText">
+                                    <input type="radio" name="contactPref" id="prefText" aria-required="true">
                                     <span class="radio-control"></span>
                                 </span>
                                 <span class="radio-label">Text</span>
                             </label>
                             <label for="prefPhone">
                                 <span class="radio-input">
-                                    <input type="radio" name="contactPref" id="prefPhone">
+                                    <input type="radio" name="contactPref" id="prefPhone" aria-required="true">
                                     <span class="radio-control"></span>
                                 </span>
                                 <span class="radio-label">Phone</span>
                             </label>
                         </fieldset>
-                        <label for="email">Email Address<span class="required">*</span></label>
-                        <input type="email" name="email" id="email" autocomplete="email" placeholder="Email Address" required>
-                        <label for="phone">Phone Number<span class="required">*</span></label>
-                        <input type="tel" name="phone" id="phone" autocomplete="tel" placeholder="Phone Number" required>
+                        <label for="email">Email Address<span class="required" aria-label="required">*</span></label>
+                        <input type="email" name="email" id="email" autocomplete="email" placeholder="Email Address" required aria-required="true">
+                        <label for="phone">Phone Number<span class="required" aria-label="required">*</span></label>
+                        <input type="tel" name="phone" id="phone" autocomplete="tel" placeholder="Phone Number" required aria-required="true">
                     </div>
-                    <input type="submit" name="mySubmit" id="mySubmit" value="Submit">
+                    <input type="submit" name="mySubmit" id="mySubmit" value="Submit" aria-label="Submit contact form">
                 </form>
             </section>
         </main>
-        <footer>
+        <footer role="contentinfo">
             <p>Copyright &copy; 2024 <span class="vynl">VYNL</span></p>
         </footer>
     </body>

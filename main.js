@@ -29,6 +29,7 @@ const storedTheme = localStorage.getItem('theme');
 if (storedTheme === 'dark') {
     body.style.backgroundColor = "black";
     body.style.color = "white";
+    body.classList.add('dark-mode');
     header.style.backgroundColor = "black";
     shop.style.backgroundColor = "black";
     contact.style.backgroundColor = "black";
@@ -40,6 +41,7 @@ if (storedTheme === 'dark') {
 } else {
     body.style.backgroundColor = "white";
     body.style.color = "black";
+    body.classList.remove('dark-mode');
     header.style.backgroundColor = "#ececec";
     shop.style.backgroundColor = "#ececec";
     contact.style.backgroundColor = "#ececec";
@@ -54,6 +56,7 @@ darkMode.addEventListener('change', function(){
     if(this.checked){
         body.style.backgroundColor = "black";
         body.style.color = "white";
+        body.classList.add('dark-mode');
         header.style.backgroundColor = "black";
         shop.style.backgroundColor = "black";
         contact.style.backgroundColor = "black";
@@ -67,6 +70,7 @@ darkMode.addEventListener('change', function(){
     else{
         body.style.backgroundColor = "white";
         body.style.color = "black";
+        body.classList.remove('dark-mode');
         header.style.backgroundColor = "#ececec";
         shop.style.backgroundColor = "#ececec";
         contact.style.backgroundColor = "#ececec";
@@ -103,7 +107,11 @@ searchElem.addEventListener('keydown', (event) => {
         event.preventDefault()
         console.log('Enter pressed!');
         const term = encodeURIComponent(searchElem.value.trim());
-        searchItunes(term);
+        if (term) {
+            searchItunes(term);
+        } else {
+            outputMessage.innerHTML = "Please enter a search term";
+        }
     }
 });
 
@@ -111,11 +119,18 @@ searchSubmit.addEventListener('click', (event) => {
     event.preventDefault();
     console.log('Search button clicked!');
     const term = encodeURIComponent(searchElem.value.trim());
-    searchItunes(term);
+    if (term) {
+        searchItunes(term);
+    } else {
+        outputMessage.innerHTML = "Please enter a search term";
+    }
 });
 
 function searchItunes(term) {
     console.log('Search term:', term);
+    outputMessage.innerHTML = "Searching...";
+    searchResultMessage.innerHTML = "";
+    
     const corsProxy = 'https://api.allorigins.win/get?url=';
     const url = `${corsProxy}${encodeURIComponent(`https://itunes.apple.com/search?term=${term}&media=music&entity=song&limit=50`)}`;
     console.log('Fetching URL:', url);
@@ -124,7 +139,12 @@ function searchItunes(term) {
 
     // fetch and display albums
     fetch(url)
-        .then(response => response.json()) // Extract the proxy's JSON response
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(proxyData => {
             const data = JSON.parse(proxyData.contents); // Parse the actual API response
             console.log('API Response:', data);
@@ -172,7 +192,7 @@ $(function(){
 
 //--------------------------cost calculator (bonus feature)------------------------------//
 
-//****This feature has bugs to work on. I should have used checkbox data values to create objects instead of manually creating them//
+//****This feature has bugs to work on. I should have used checkbox data values to create objects instead of manually creating them//**
 
 //create an empty cart array
 let cart = [];
@@ -207,26 +227,46 @@ let subtotalSpan = document.getElementById('subtotal').children[0];
 let taxSpan = document.getElementById('tax').children[0];
 let shippingSpan = document.getElementById('shipping').children[0];
 let totalSpan = document.getElementById('total').children[0];
+let itemsList = document.getElementById('itemsList');
 
 //get checkbox inputs
 let itemCheckboxes = document.querySelectorAll("#productDisplay input[type='checkbox']");
 
-
 //take whatever is in cart and calculate totals and display on page
-function addToCart(){
+function updateCartDisplay() {
     runningSubtotal = 0.00;
-    cart.forEach((cartItemToAdd) => {
-        runningSubtotal += cartItemToAdd.price;
-        subtotalSpan.innerHTML = runningSubtotal;
+    
+    // Clear the items list
+    itemsList.innerHTML = '';
+    
+    if (cart.length === 0) {
+        itemsList.innerHTML = '<li id="emptyCartMessage">Your Cart is Empty</li>';
+        subtotalSpan.innerHTML = '$0.00';
+        taxSpan.innerHTML = '$0.00';
+        shippingSpan.innerHTML = '$0.00';
+        totalSpan.innerHTML = '$0.00';
+        return;
+    }
+    
+    // Add items to the list and calculate subtotal
+    cart.forEach((cartItem) => {
+        runningSubtotal += cartItem.price;
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `${cartItem.name} - ${cartItem.artist} - $${cartItem.price.toFixed(2)}`;
+        itemsList.appendChild(listItem);
     });
+    
+    // Calculate tax, shipping, and total
+    runningTax = runningSubtotal * taxRate;
+    runningShipping = runningSubtotal * shippingRate;
+    runningTotal = runningSubtotal + runningTax + runningShipping;
+    
+    // Update display
+    subtotalSpan.innerHTML = `$${runningSubtotal.toFixed(2)}`;
+    taxSpan.innerHTML = `$${runningTax.toFixed(2)}`;
+    shippingSpan.innerHTML = `$${runningShipping.toFixed(2)}`;
+    totalSpan.innerHTML = `$${runningTotal.toFixed(2)}`;
 }
-function removeFromCart(){
-    cart.forEach((cartItemToRemove) => {
-        runningSubtotal -= cartItemToRemove.price;
-        subtotalSpan.innerHTML = runningSubtotal;
-    });
-}
-
 
 //add to cart = push to array
 function cartList(e){  
@@ -237,38 +277,54 @@ function cartList(e){
     if(currentItem.checked && currentItem.name === "item1Check"){
         if(cart.indexOf(item1Object) === -1){//if item is not already in cart
             cart.push(item1Object);
-            addToCart();
         }
     }else if(currentItem.checked && currentItem.name === "item2Check"){
         if(cart.indexOf(item2Object) === -1){//if item is not already in cart
             cart.push(item2Object);
-            addToCart();
         }
     }else if(currentItem.checked && currentItem.name === "item3Check"){
         if(cart.indexOf(item3Object) === -1){//if item is not already in cart
             cart.push(item3Object);
-            addToCart();
         }
     }
     
     if(!(currentItem.checked) && (currentItem.name === "item1Check")){
-        removeFromCart();      
         let index = cart.indexOf(item1Object);
-        cart.splice(index, 1);
-
+        if (index > -1) {
+            cart.splice(index, 1);
+        }
     }
     if(!(currentItem.checked) && (currentItem.name === "item2Check")){
-        removeFromCart();     
         let index = cart.indexOf(item2Object);
-        cart.splice(index, 1);
- 
+        if (index > -1) {
+            cart.splice(index, 1);
+        }
     }
     if(!(currentItem.checked) && (currentItem.name === "item3Check")){
-        removeFromCart();      
         let index = cart.indexOf(item3Object);
-        cart.splice(index, 1);
+        if (index > -1) {
+            cart.splice(index, 1);
+        }
     }
+    
+    updateCartDisplay();
 }
+
+// Checkout functionality
+document.getElementById('checkout').addEventListener('click', function() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+    
+    const total = runningTotal.toFixed(2);
+    alert(`Thank you for your order! Total: $${total}\n\nThis is a demo site - no actual purchase will be made.`);
+    
+    // Clear cart
+    cart = [];
+    itemCheckboxes.forEach(checkbox => checkbox.checked = false);
+    updateCartDisplay();
+});
 
 
 
@@ -304,14 +360,17 @@ function guessGame(e){
         throw "Please choose a number between 1 and 10";
       }else{
         if(userNumber === randomNumber){
-          gameMessage.innerHTML = "You won! Enter your information below to receive your gift"
+          gameMessage.innerHTML = "🎉 You won! Enter your information below to receive your VYNL gift card! 🎉";
+          gameMessage.style.color = "#28a745";
         }else{
-          gameMessage.innerHTML = "You lost, try again!"
+          gameMessage.innerHTML = "😔 You lost, try again!";
+          gameMessage.style.color = "#dc3545";
         }      
       }
     }catch(error){
 		// add the error messge to the span in the form
 		gameErrorMessage.innerHTML = error;
+		gameErrorMessage.style.color = "#dc3545";
 	}
 }
 
@@ -319,6 +378,39 @@ function guessGame(e){
 function getRandomNumber(min, max) {
    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// Contact form validation
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const fName = document.getElementById('fName').value.trim();
+    const lName = document.getElementById('lName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    
+    // Basic validation
+    if (!fName || !lName || !email || !phone) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+    
+    // Phone validation (basic)
+    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+    if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+        alert('Please enter a valid phone number.');
+        return;
+    }
+    
+    alert('Thank you for your message! We\'ll get back to you soon.');
+    this.reset();
+});
 
 
 
@@ -328,7 +420,11 @@ function getRandomNumber(min, max) {
 for(let itemCheckbox of itemCheckboxes){
     itemCheckbox.addEventListener("change", cartList);
 }
+
 document.getElementById("guessSubmit").addEventListener("click", guessGame);
+
+// Initialize cart display
+updateCartDisplay();
 
 
 
